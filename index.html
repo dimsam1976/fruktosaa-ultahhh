@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            transition: background 0.3s;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        button {
+            background: #2575fc;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background: #6a11cb;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Hai haiii fruktosaa, welcomeee!!, disinii kamuu akann melihat seuatu yang luar biasaa</h2>
+    <form id="loginForm">
+        <div>
+            <label for="username">Nama panggilann akuu selain dimsam</label>
+            <input type="text" id="username" required>
+        </div>
+        <div>
+            <label for="password">tanggal sepesial kita bosh</label>
+            <input type="password" id="password" required>
+        </div>
+        <button type="submit">Lihattt</button>
+        <div class="error" id="error-message"></div>
+    </form>
+    <div class="footer">Dimsam sigma sigma boy, sigma boy</div>
+</div>
+
+<script>
+    const validUsername = "semut"; // Ganti dengan ID pengguna yang valid
+    const validPassword = "270924"; // Ganti dengan kata sandi yang valid
+
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Mencegah pengiriman form
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const errorMessage = document.getElementById("error-message");
+
+        if (username === validUsername && password === validPassword) {
+            // Kirim permintaan ke login.php untuk menyimpan status login
+            fetch('login.php', {
+                method: 'POST',
+                body: JSON.stringify({ loggedin: true }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(() => {
+                window.location.href = "redirect.php"; // Arahkan ke URL tujuan
+            });
+        } else {
+            errorMessage.textContent = "masaaa kamuu gatauu sihh, kamu bukan rahma ya :(.";
+        }
+    });
+</script>
+
+</body>
+</html>
